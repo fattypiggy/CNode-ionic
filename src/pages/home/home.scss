@@ -1,3 +1,51 @@
 page-home {
 
 }
+.pull-left {
+    float: left;
+}
+.pull-right {
+    float: right;
+}
+.cell {
+    position: relative;
+}
+.clear {
+    clear: both;
+}
+.reply_count {
+    text-align: center;
+    width: 80px;
+    display: inline-block;
+}
+.count_of_replies {
+    color: #9e78c0;
+}
+.count_seperator {
+    margin: 0 -3px;
+    font-size: 10px;
+}
+.count_of_visits {
+    font-size: 10px;
+    color: #80bd01;
+}
+.topicTab {
+    background: #e5e5e5;
+    color: #999;
+    padding: 2px 4px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    font-size: 12px;
+}
+.goodTab {
+    background: #80bd01;
+    color: #fff;
+    padding: 2px 4px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -o-border-radius: 3px;
+    font-size: 12px;
+}
