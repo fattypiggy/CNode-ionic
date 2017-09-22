@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { SharedProvider } from "../../providers/shared/shared";
+// import { TopicComponent } from "../../components/topic/topic";
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -13,7 +15,7 @@ export class HomePage {
 
   ngOnInit() {
     console.log("init");
-    this.sharedProvider.getTopics()
+    this.sharedProvider.getTopics("share")
       .subscribe(
         data => {
           if(data.success == true){
