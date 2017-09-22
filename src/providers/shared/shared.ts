@@ -9,6 +9,7 @@ import 'rxjs/add/operator/map';
   and Angular DI.
 */
 const BASEURI = 'https://cnodejs.org/api/v1';
+const LIMIT = 20;
 
 @Injectable()
 export class SharedProvider {
@@ -16,20 +17,21 @@ export class SharedProvider {
   constructor(public http: Http) {
     console.log('Hello SharedProvider Provider');
   }
-  getTopics(tab: string, page?: number, limit?: number){
+  getTopics(tab: string, page?: number, limit = LIMIT) {
     return this.http.get(BASEURI + '/topics', {
       params: {
+        "tab": tab,
         "page": page,
         "limit": limit
       }
     })
-    .map(this.extractData);
+      .map(this.extractData);
     // .catch(this.errorHandler);
   }
 
   private extractData(res: Response) {
     let body = res.json();
-    return body || {};
+    return body.data || {};
   }
 
   private errorHandler(error: any) {
