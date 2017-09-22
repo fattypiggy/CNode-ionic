@@ -8,10 +8,10 @@
   <ion-list>
     <ion-item *ngFor="let topic of topics">
       <ion-avatar item-start>
-        <img src="{{topic.avatar_url}}">
+        <img src="{{topic.author.avatar_url}}">
       </ion-avatar>
       <div class="cell">
-          <h2 class="pull-left">{{topic.loginname}}</h2>
+          <h2 class="pull-left">{{topic.author.loginname}}</h2>
           <span class="pull-right reply_count">
             <span class="count_of_replies">{{topic.reply_count}}</span>
             <span class="count_seperator">/</span>
