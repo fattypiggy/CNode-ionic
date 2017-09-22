@@ -1,28 +1,48 @@
 <ion-header>
   <ion-navbar>
-    <ion-title (click)="onClickTab()">首页<i class="fa fa-angle-down"></i></ion-title>
+    <ion-title>首页</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content contentTop="100">
+<ion-content contentTop="100" padding>
+  <ion-segment [(ngModel)]="current_tab" color="secondary" (ionChange)="onChangeTab()">
+    <ion-segment-button value="all">
+      全部
+    </ion-segment-button>
+    <ion-segment-button value="good">
+      精华
+    </ion-segment-button>
+    <ion-segment-button value="share">
+      分享
+    </ion-segment-button>
+    <ion-segment-button value="ask">
+      问答
+    </ion-segment-button>
+    <ion-segment-button value="job">
+      招聘
+    </ion-segment-button>
+    <ion-segment-button value="dev">
+      测试
+    </ion-segment-button>
+  </ion-segment>
   <ion-list>
     <ion-item *ngFor="let topic of topics">
       <ion-avatar item-start>
         <img src="{{topic.author.avatar_url}}">
       </ion-avatar>
       <div class="cell">
-          <h2 class="pull-left">{{topic.author.loginname}}</h2>
-          <span class="pull-right reply_count">
+        <h2 class="pull-left">{{topic.author.loginname}}</h2>
+        <span class="pull-right reply_count">
             <span class="count_of_replies">{{topic.reply_count}}</span>
-            <span class="count_seperator">/</span>
-            <span class="count_of_visits">{{topic.visit_count}}</span>
-          </span>
+        <span class="count_seperator">/</span>
+        <span class="count_of_visits">{{topic.visit_count}}</span>
+        </span>
       </div>
       <div class="clear cell">
         <span [ngClass]="{goodTab: topic.top, topicTab: !topic.top}">置顶</span>
         <span>{{topic.title}}</span>
       </div>
-      
+
     </ion-item>
   </ion-list>
   <!-- <h2>Welcome to Ionic!</h2>
