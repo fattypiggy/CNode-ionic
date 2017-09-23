@@ -4,8 +4,8 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content contentTop="100" padding>
-  <ion-segment [(ngModel)]="current_tab" color="primary" (ionChange)="onChangeTab()">
+<ion-content>
+  <ion-segment class="padding" [(ngModel)]="current_tab" color="primary" (ionChange)="onChangeTab()">
     <ion-segment-button value="all">
       全部
     </ion-segment-button>
@@ -25,7 +25,7 @@
       测试
     </ion-segment-button>
   </ion-segment>
-  <ion-list>
+  <ion-list class="padding">
     <ion-item *ngFor="let topic of topics">
       <ion-avatar item-start>
         <img src="{{topic.author.avatar_url}}">
@@ -45,13 +45,8 @@
 
     </ion-item>
   </ion-list>
-  <!-- <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p> -->
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
