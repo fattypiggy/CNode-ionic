@@ -49,3 +49,9 @@ page-home {
     -o-border-radius: 3px;
     font-size: 12px;
 }
+
+.title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

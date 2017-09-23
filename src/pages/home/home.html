@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content contentTop="100" padding>
-  <ion-segment [(ngModel)]="current_tab" color="secondary" (ionChange)="onChangeTab()">
+  <ion-segment [(ngModel)]="current_tab" color="primary" (ionChange)="onChangeTab()">
     <ion-segment-button value="all">
       全部
     </ion-segment-button>
@@ -38,7 +38,7 @@
         <span class="count_of_visits">{{topic.visit_count}}</span>
         </span>
       </div>
-      <div class="clear cell">
+      <div class="clear cell title">
         <span [ngClass]="{goodTab: topic.top, topicTab: !topic.top}">置顶</span>
         <span>{{topic.title}}</span>
       </div>
