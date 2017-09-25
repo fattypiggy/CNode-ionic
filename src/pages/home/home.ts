@@ -4,43 +4,74 @@ import { SharedProvider } from "../../providers/shared/shared";
 
 import { LoginPage } from "../login/login";
 // import { TopicComponent } from "../../components/topic/topic";
+import { TabData } from "../../providers/interface/data";
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
+  public tabData: TabData[];
   private current_tab: string;
-  private topics: any[];
-  private isAuthenticated:boolean;
+  private topics: Array<any>;
+  // private isAuthenticated: boolean;
 
   constructor(public navCtrl: NavController, public sharedProvider: SharedProvider) {
   }
 
   ngOnInit() {
-    // this.current_tab = "share";
-    // this.onChangeTab();
-    if(!this.isAuthenticated){
-      this.gotoLogin();
+    this.current_tab = "all";
+    this.tabData = [];
+    this.onChangeTab(1);
+  }
+
+  onChangeTab(page?: number) {
+    if (this.tabData.find(myObj => myObj.tabName == this.current_tab)) {
+
+    } else {
+      this.tabData.push(new TabData(this.current_tab, 1, []));
     }
+    this.getTopics(this.current_tab, 1);
   }
 
-  onChangeTab(page?:number) {
-    this.getTopics(this.current_tab,page);
-  }
-
-  goToDetail(id:number) {
+  goToDetail(id: number) {
     this.navCtrl.push(LoginPage);
   }
 
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      this.getTopics(this.current_tab, 1);
+      refresher.complete();
+    }, 1500);
+  }
+
+  doInfinite(infiniteScroll) {
+    console.log('Begin async operation');
+
+    setTimeout(() => {
+      let tmp = this.tabData.find(myObj => myObj.tabName == this.current_tab);
+      this.getTopics(this.current_tab, ++tmp.page);
+      console.log('Async operation has ended');
+      infiniteScroll.complete();
+    }, 1500);
+  }
   gotoLogin() {
     this.navCtrl.push(LoginPage);
   }
   getTopics(tab: string, page?: number) {
-    this.sharedProvider.getTopics(tab,page)
+    this.sharedProvider.getTopics(tab, page)
       .subscribe(
       data => {
-        this.topics = data;
+        let tmp: TabData;
+        if (tmp = this.tabData.find(obj => obj.tabName == this.current_tab && obj.topics.length > 0)) {
+          tmp.topics = tmp.topics.concat(data);
+        } else {
+          this.tabData.find(myObj => myObj.tabName == this.current_tab).topics = data;
+        }
+        this.topics = this.tabData.find(myObj => myObj.tabName == this.current_tab).topics;
       }
       );
   }

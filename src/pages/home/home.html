@@ -5,6 +5,14 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
   <ion-segment class="padding" [(ngModel)]="current_tab" color="primary" (ionChange)="onChangeTab()">
     <ion-segment-button value="all">
       全部
@@ -39,7 +47,7 @@
         </span>
       </div>
       <div class="clear cell title">
-        <span [ngClass]="{goodTab: topic.top, topicTab: !topic.top}">置顶</span>
+        <span [ngClass]="{topTab: topic.top, topicTab: !topic.top}">置顶</span>
         <span>{{topic.title}}</span>
       </div>
 
