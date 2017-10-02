@@ -44,7 +44,8 @@
           </span>
         </div>
         <div class="clear cell title">
-          <span [ngClass]="{topTab: topic.top, topicTab: !topic.top}">置顶</span>
+          <span *ngIf="topic.top" class="topTab">置顶</span>
+          <span *ngIf="!topic.top" class="topicTab">{{topic.tab}}</span>
           <span>{{topic.title}}</span>
         </div>
       </div>
