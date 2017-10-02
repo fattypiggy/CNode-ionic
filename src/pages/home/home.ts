@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { SharedProvider } from "../../providers/shared/shared";
+import { TabData } from "../../providers/interface/data";
 
 import { LoginPage } from "../login/login";
-// import { TopicComponent } from "../../components/topic/topic";
-import { TabData } from "../../providers/interface/data";
+import { ProfilePage } from "../profile/profile";
+import { DetailPage } from "../detail/detail";
 
 @Component({
   selector: 'page-home',
@@ -34,8 +35,18 @@ export class HomePage {
     this.getTopics(this.current_tab, 1);
   }
 
-  goToDetail(id: number) {
-    this.navCtrl.push(LoginPage);
+  gotoDetail(id: string) {
+    console.log("go to detail:" + id);
+    this.navCtrl.push(DetailPage, {
+      "id": id
+    });
+  }
+
+  gotoProfile(loginname: string) {
+    console.log("go to profile:" + loginname);
+    this.navCtrl.push(ProfilePage, {
+      "loginname": loginname
+    })
   }
 
   doRefresh(refresher) {

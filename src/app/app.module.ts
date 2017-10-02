@@ -8,6 +8,9 @@ import { AboutPage } from '../pages/about/about';
 import { MePage } from "../pages/me/me";
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { LoginPageModule } from "../pages/login/login.module";
+import { DetailPageModule } from "../pages/detail/detail.module";
+import { ProfilePageModule } from "../pages/profile/profile.module";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -24,6 +27,9 @@ import { SharedProvider } from '../providers/shared/shared';
   imports: [
     BrowserModule,
     HttpModule,
+    LoginPageModule,
+    DetailPageModule,
+    ProfilePageModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
