@@ -6,11 +6,7 @@
 
 <ion-content>
   <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content
-      pullingIcon="arrow-dropdown"
-      pullingText="Pull to refresh"
-      refreshingSpinner="circles"
-      refreshingText="Refreshing...">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="加载中...">
     </ion-refresher-content>
   </ion-refresher>
   <ion-segment class="padding" [(ngModel)]="current_tab" color="primary" (ionChange)="onChangeTab()">
@@ -35,26 +31,28 @@
   </ion-segment>
   <ion-list class="padding">
     <ion-item *ngFor="let topic of topics">
-      <ion-avatar item-start>
+      <ion-avatar item-start (click)="gotoProfile(topic.author.loginname)">
         <img src="{{topic.author.avatar_url}}">
       </ion-avatar>
-      <div class="cell">
-        <h2 class="pull-left">{{topic.author.loginname}}</h2>
-        <span class="pull-right reply_count">
-            <span class="count_of_replies">{{topic.reply_count}}</span>
-        <span class="count_seperator">/</span>
-        <span class="count_of_visits">{{topic.visit_count}}</span>
-        </span>
-      </div>
-      <div class="clear cell title">
-        <span [ngClass]="{topTab: topic.top, topicTab: !topic.top}">置顶</span>
-        <span>{{topic.title}}</span>
+      <div (click)="gotoDetail(topic.id)">
+        <div class="cell">
+          <h2 class="pull-left">{{topic.author.loginname}}</h2>
+          <span class="pull-right reply_count">
+              <span class="count_of_replies">{{topic.reply_count}}</span>
+          <span class="count_seperator">/</span>
+          <span class="count_of_visits">{{topic.visit_count}}</span>
+          </span>
+        </div>
+        <div class="clear cell title">
+          <span [ngClass]="{topTab: topic.top, topicTab: !topic.top}">置顶</span>
+          <span>{{topic.title}}</span>
+        </div>
       </div>
 
     </ion-item>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载数据中...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>
