@@ -24,22 +24,24 @@ export class SharedProvider {
         "page": page,
         "limit": limit
       }
-    })
-      .map(this.extractData);
+    }).map(this.extractData);
     // .catch(this.errorHandler);
   }
 
+  getTopic(id: string, accesstoken?: string) {
+    return this.http.get(BASEURI + '/topic/' + id, {
+      params: {
+        "accesstoken": accesstoken
+      }
+    }).map(this.extractData);
+  }
   private extractData(res: Response) {
     let body = res.json();
     return body.data || {};
   }
 
-  private errorHandler(error: any) {
-
-  }
-
-  // getTopics() {
-  //   return this.http.get(BASEURI + '/topics')
-  //     .map((res: Response) => res.json());
+  // private errorHandler(error: any): Observable<any> {
+  //   console.log("error:", error);
+  //   return;
   // }
 }
