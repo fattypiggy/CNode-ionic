@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { SharedProvider } from "../../providers/shared/shared";
 /**
  * Generated class for the DetailPage page.
  *
@@ -14,8 +15,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'detail.html',
 })
 export class DetailPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  private id: string;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public sharedProvider: SharedProvider) {
+    this.id = navParams.get("id");
+  }
+  ngOnInit() {
+    
   }
 
   ionViewDidLoad() {
