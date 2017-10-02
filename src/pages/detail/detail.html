@@ -7,14 +7,20 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>detail</ion-title>
+    <ion-title>{{topic.tab}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <p>
-    {{id}}
-  </p>
+  <div class="panel">
+    <div class="title">
+      <span *ngIf="topic.top" class="topTab">置顶</span>
+      <span *ngIf="!topic.top" class="topicTab">{{topic.tab}}</span>
+      <span>{{topic.title}}</span>
+    </div>
+    <div class="content" [innerHTML]="topic.content"></div>
+  </div>
+
 </ion-content>

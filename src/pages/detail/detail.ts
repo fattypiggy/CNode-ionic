@@ -16,11 +16,18 @@ import { SharedProvider } from "../../providers/shared/shared";
 })
 export class DetailPage {
   private id: string;
+  private topic: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public sharedProvider: SharedProvider) {
     this.id = navParams.get("id");
   }
   ngOnInit() {
-    
+    this.topic = this.sharedProvider.getTopic(this.id)
+      .subscribe(
+      data => {
+        this.topic = data;
+      }
+      );
+    console.log("topic:" + this.topic);
   }
 
   ionViewDidLoad() {
