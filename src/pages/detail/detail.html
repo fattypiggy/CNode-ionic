@@ -7,20 +7,45 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{topic.tab}}</ion-title>
+    <ion-title>正文</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <div class="panel">
-    <div class="title">
-      <span *ngIf="topic.top" class="topTab">置顶</span>
-      <span *ngIf="!topic.top" class="topicTab">{{topic.tab}}</span>
-      <span>{{topic.title}}</span>
-    </div>
-    <div class="content" [innerHTML]="topic.content"></div>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <h1>{{topic.title}}</h1>
+        <p class="pull-right">发布于{{topic.create_at | since}}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div class="content" [innerHTML]="topic.content"></div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-list class="padding">
+    <ion-item *ngFor="let reply of topic.replies">
+      <ion-avatar item-start (click)="gotoProfile(reply.author.loginname)">
+        <img src="{{reply.author.avatar_url}}">
+      </ion-avatar>
+      <div [innerHTML]="reply.content">
+      </div>
+    </ion-item>
+  </ion-list>
+  <!-- <ion-item >
+      <h1>{{topic.title}}</h1>
+  </ion-item> -->
+  <!-- <div class="title">
+    <h1>{{topic.title}}</h1>
+    <span class="clear pull-right"></span>
+  </div> -->
+
+  <div class="replies">
+
   </div>
 
 </ion-content>
