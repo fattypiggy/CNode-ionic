@@ -18,7 +18,7 @@
     <ion-row>
       <ion-col>
         <h1>{{topic.title}}</h1>
-        <p class="pull-right">发布于{{topic.create_at | since}}</p>
+        <p text-right>{{topic.create_at | since}}</p>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -27,25 +27,18 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-list class="padding">
+  <ion-list padding-top>
     <ion-item *ngFor="let reply of topic.replies">
       <ion-avatar item-start (click)="gotoProfile(reply.author.loginname)">
         <img src="{{reply.author.avatar_url}}">
       </ion-avatar>
-      <div [innerHTML]="reply.content">
+      <div>
+        <div class="cell">
+          <h2 text-left>{{reply.author.loginname}}</h2>
+        </div>
+        <div class="clear" [innerHTML]="reply.content" text-wrap></div>
       </div>
     </ion-item>
   </ion-list>
-  <!-- <ion-item >
-      <h1>{{topic.title}}</h1>
-  </ion-item> -->
-  <!-- <div class="title">
-    <h1>{{topic.title}}</h1>
-    <span class="clear pull-right"></span>
-  </div> -->
-
-  <div class="replies">
-
-  </div>
 
 </ion-content>
