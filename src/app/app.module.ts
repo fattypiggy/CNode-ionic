@@ -11,11 +11,14 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPageModule } from "../pages/login/login.module";
 import { DetailPageModule } from "../pages/detail/detail.module";
 import { ProfilePageModule } from "../pages/profile/profile.module";
+import { QrcodePageModule } from "../pages/qrcode/qrcode.module";
+
+import { SharedProvider } from '../providers/shared/shared';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { SharedProvider } from '../providers/shared/shared';
-
+import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
+import { ThreeDeeTouch, ThreeDeeTouchForceTouch, ThreeDeeTouchQuickAction } from "@ionic-native/three-dee-touch";
 @NgModule({
   declarations: [
     MyApp,
@@ -30,6 +33,7 @@ import { SharedProvider } from '../providers/shared/shared';
     LoginPageModule,
     DetailPageModule,
     ProfilePageModule,
+    QrcodePageModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -43,6 +47,8 @@ import { SharedProvider } from '../providers/shared/shared';
   providers: [
     StatusBar,
     SplashScreen,
+    QRScanner,
+    ThreeDeeTouch,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     SharedProvider
   ]
