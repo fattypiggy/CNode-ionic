@@ -18,6 +18,9 @@ export class MePage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
+  scan() {
+    this.navCtrl.push('LoginPage');
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad MePage');
   }
