@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 import { SharedProvider } from "../../providers/shared/shared";
 import { TabData } from "../../providers/interface/data";
 
-import { LoginPage } from "../login/login";
-import { ProfilePage } from "../profile/profile";
-import { DetailPage } from "../detail/detail";
-
+@IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -37,14 +34,14 @@ export class HomePage {
 
   gotoDetail(id: string) {
     console.log("go to detail:" + id);
-    this.navCtrl.push(DetailPage, {
+    this.navCtrl.push('DetailPage', {
       "id": id
     });
   }
 
   gotoProfile(loginname: string) {
     console.log("go to profile:" + loginname);
-    this.navCtrl.push(ProfilePage, {
+    this.navCtrl.push('ProfilePage', {
       "loginname": loginname
     })
   }
@@ -70,7 +67,7 @@ export class HomePage {
     }, 1500);
   }
   gotoLogin() {
-    this.navCtrl.push(LoginPage);
+    this.navCtrl.push('LoginPage');
   }
   getTopics(tab: string, page?: number) {
     this.sharedProvider.getTopics(tab, page)

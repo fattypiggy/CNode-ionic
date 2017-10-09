@@ -4,13 +4,11 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ThreeDeeTouch, ThreeDeeTouchForceTouch, ThreeDeeTouchQuickAction } from "@ionic-native/three-dee-touch";
 
-import { TabsPage } from '../pages/tabs/tabs';
-
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage: any = TabsPage;
+  rootPage: any = 'TabsPage';
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, threeDeeTouch: ThreeDeeTouch) {
     platform.ready().then(() => {
@@ -46,8 +44,8 @@ export class MyApp {
         (payload) => {
           // returns an object that is the button you presed
           console.log('Pressed the ${payload.title} button');
-          switch (payload.title){
-            case '写话题':  console.log('写话题'); break;
+          switch (payload.title) {
+            case '写话题': console.log('写话题'); break;
             case '分享"Node中文社区"': console.log('分享"Node中文社区"'); break;
           }
           console.log(payload.type);
