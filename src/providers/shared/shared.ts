@@ -19,7 +19,7 @@ export class Global {
   //接口地址
   static API: any = {
     getTopics: '/topics',
-    getTopic: '/topic',
+    getTopic: '/topic/',
     postTopic: '/topics',
     updateTopic:'/topics/update',
     collectTopics:'/topic_collect/collect',
@@ -43,19 +43,19 @@ export class SharedProvider {
 
   constructor(public http: Http, public loadingCtrl: LoadingController, public alertCtrl: AlertController, public toastCtrl: ToastController) { }
 
-  public httpGet(url, params, callback, loader: boolean = false) {
+  public httpGet(url, params, loader: boolean = false) {
     let loading = this.loadingCtrl.create({});
     if (loader) {
       loading.present();
     }
-    this.http.get(Global.BASEURI + url + this.encode(params))
+    return this.http.get(Global.BASEURI + url + this.encode(params))
       .toPromise()
       .then(res => {
-        var d = res.json();
+        let d = res.json();
         if (loader) {
           loading.dismiss();
         }
-        callback(d == null ? "[]" : d);
+        return d;
       })
       .catch(error => {
         if (loader) {
@@ -70,14 +70,13 @@ export class SharedProvider {
     if (loader) {
       loading.present();
     }
-    this.http.post(Global.BASEURI + url, params)
+    return this.http.post(Global.BASEURI + url, params)
       .toPromise()
       .then(res => {
         var d = res.json();
         if (loader) {
           loading.dismiss();
         }
-        callback(d == null ? "[]" : d);
       }).catch(error => {
         if (loader) {
           loading.dismiss();

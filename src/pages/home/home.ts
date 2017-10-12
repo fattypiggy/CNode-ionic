@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
-import { SharedProvider } from "../../providers/shared/shared";
+import { SharedProvider, Global } from "../../providers/shared/shared";
 import { TabData } from "../../providers/interface/data";
 
 @IonicPage()
@@ -70,17 +70,20 @@ export class HomePage {
     this.navCtrl.push('LoginPage');
   }
   getTopics(tab: string, page?: number) {
-    this.sharedProvider.getTopics(tab, page)
-      .subscribe(
-      data => {
-        let tmp: TabData;
-        if (tmp = this.tabData.find(obj => obj.tabName == this.current_tab && obj.topics.length > 0)) {
-          tmp.topics = tmp.topics.concat(data);
-        } else {
-          this.tabData.find(myObj => myObj.tabName == this.current_tab).topics = data;
-        }
-        this.topics = this.tabData.find(myObj => myObj.tabName == this.current_tab).topics;
-      }
-      );
+    this.sharedProvider.httpGet(Global.API.getTopics, { "tab": tab, "page": page, "limit": Global.LIMIT }, true)
+    .then((data)=>{
+      this.extractData(data);
+    });
+  }
+  extractData(data) {
+    data = data.data;
+    let tmp: TabData;
+    console.log(this.tabData);
+    if (tmp = this.tabData.find(obj => obj.tabName == this.current_tab && obj.topics.length > 0)) {
+      tmp.topics = tmp.topics.concat(data);
+    } else {
+      this.tabData.find(myObj => myObj.tabName == this.current_tab).topics = data;
+    }
+    this.topics = this.tabData.find(myObj => myObj.tabName == this.current_tab).topics;
   }
 }
