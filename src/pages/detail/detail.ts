@@ -28,4 +28,8 @@ export class DetailPage {
       );
     console.log("topic:" + this.topic);
   }
+
+  like(reply){
+    console.log("like++");
+  }
 }

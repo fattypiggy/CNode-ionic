@@ -18,7 +18,7 @@
     <ion-row>
       <ion-col>
         <h1>{{topic.title}}</h1>
-        <p text-right class="create_at">{{topic.create_at | since}}</p>
+        <p text-right class="create_at">{{topic.author?.loginname}} {{topic.create_at | since}}</p>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -36,7 +36,9 @@
         <div class="cell reply">
           <span text-left>{{reply.author.loginname}}</span>
           <span class="create_at">{{reply.create_at | since}}</span>
+          
         </div>
+        <i class="fa fa-thumbs-o-up pull-right" aria-hidden="true" (click)="like(reply)">{{reply.ups?.length}}</i>
         <div class="clear" [innerHTML]="reply.content" text-wrap></div>
       </div>
     </ion-item>
