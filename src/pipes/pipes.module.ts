@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { SincePipe } from './../pipes/since/since';
+import { LinkPipe } from './link/link';
 @NgModule({
-	declarations: [SincePipe],
+	declarations: [SincePipe,
+    LinkPipe],
 	imports: [],
-	exports: [SincePipe]
+	exports: [SincePipe,
+    LinkPipe]
 })
 export class PipesModule {
 	static forChild() {
