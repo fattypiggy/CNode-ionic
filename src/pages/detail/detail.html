@@ -23,7 +23,7 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <div class="content" [innerHTML]="topic.content"></div>
+        <div class="content" [innerHTML]="topic.content?(topic.content  | link):topic.content"></div>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -39,7 +39,7 @@
           
         </div>
         <i class="fa fa-thumbs-o-up pull-right" aria-hidden="true" (click)="like(reply)">{{reply.ups?.length}}</i>
-        <div class="clear" [innerHTML]="reply.content" text-wrap></div>
+        <div class="clear" [innerHTML]="reply.content"  text-wrap></div>
       </div>
     </ion-item>
   </ion-list>
