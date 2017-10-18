@@ -21,18 +21,18 @@ export class Global {
     getTopics: '/topics',
     getTopic: '/topic/',
     postTopic: '/topics',
-    updateTopic:'/topics/update',
-    collectTopics:'/topic_collect/collect',
-    cancelCollect:'/topic_collect/de_collect',
-    topicCollect:'/topic_collect/',
-    newReply:'/topic/:topic_id/replies',
-    upReply:'/reply/:reply_id/ups',
-    userInfo:'/user/',
-    verifyToken:'/accesstoken',
-    msgCount:'/message/count',
-    msgs:'/messages',
-    markAll:'/message/mark_all',
-    markOne:'/message/mark_one/:msg_id',
+    updateTopic: '/topics/update',
+    collectTopics: '/topic_collect/collect',
+    cancelCollect: '/topic_collect/de_collect',
+    topicCollect: '/topic_collect/',
+    newReply: '/topic/:topic_id/replies',
+    upReply: '/reply/:reply_id/ups',
+    userInfo: '/user/',
+    verifyToken: '/accesstoken',
+    msgCount: '/message/count',
+    msgs: '/messages',
+    markAll: '/message/mark_all',
+    markOne: '/message/mark_one/:msg_id',
 
   };
   static LIMIT = 20;
@@ -65,7 +65,7 @@ export class SharedProvider {
       });
   }
 
-  httpPost(url: string, params, callback, loader: boolean = false) {
+  httpPost(url: string, params, loader: boolean = false) {
     let loading = this.loadingCtrl.create();
     if (loader) {
       loading.present();
@@ -77,6 +77,7 @@ export class SharedProvider {
         if (loader) {
           loading.dismiss();
         }
+        return d;
       }).catch(error => {
         if (loader) {
           loading.dismiss();
