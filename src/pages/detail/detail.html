@@ -38,7 +38,8 @@
           <span class="create_at">{{reply.create_at | since}}</span>
           
         </div>
-        <i class="fa fa-thumbs-o-up pull-right" aria-hidden="true" (click)="like(reply)">{{reply.ups?.length}}</i>
+        <i class="fa fa-thumbs-o-up pull-right" *ngIf="!reply.is_uped" (click)="like(reply)">{{reply.ups?.length}}</i>
+        <i class="fa fa-thumbs-up pull-right" *ngIf="reply.is_uped" (click)="like(reply)">{{reply.ups?.length}}</i>
         <div class="clear" [innerHTML]="reply.content"  text-wrap></div>
       </div>
     </ion-item>
