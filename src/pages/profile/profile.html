@@ -7,12 +7,19 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>profile</ion-title>
+    <ion-title>社员</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-<p>{{loginname}}</p>
+<ion-content padding class="profile">
+  <ion-item>
+    <ion-avatar item-start>
+      <img src="{{userInfo.avatar_url}}">
+    </ion-avatar>
+    <h1>{{userInfo?.loginname}}</h1>
+    <p>{{userInfo?.create_at | since}}前加入</p>
+    <p>{{userInfo?.score}} 积分</p>
+  </ion-item>
 </ion-content>

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, SimpleChanges } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { SharedProvider, Global } from "../../providers/shared/shared";
 /**
  * Generated class for the ProfilePage page.
  *
@@ -16,12 +16,25 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class ProfilePage {
 
   private loginname: string;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  private userInfo: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public sharedProvider: SharedProvider) {
     this.loginname = navParams.get("loginname");
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
+  ngOnInit() {
+    if (this.loginname) {
+      this.getInfo(this.loginname);
+    }
   }
 
+  getInfo(loginname: string) {
+    this.sharedProvider.httpGet(Global.API.userInfo + this.loginname, {}, true)
+      .then((data) => {
+        this.extractData(data);
+      });
+  }
+  extractData(data) {
+    if (data.success) {
+      this.userInfo = data.data;
+    }
+  }
 }
