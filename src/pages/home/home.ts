@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import { SharedProvider, Global } from "../../providers/shared/shared";
-import { TabData } from "../../providers/interface/data";
+import { OnInit, AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
-  public tabData: TabData[];
-  private current_tab: string;
+export class HomePage implements OnInit, AfterViewInit {
+  private currentTab: string;
+  private currentPage: number;
   private topics: Array<any>;
   // private isAuthenticated: boolean;
 
@@ -18,18 +18,15 @@ export class HomePage {
   }
 
   ngOnInit() {
-    this.current_tab = "all";
-    this.tabData = [];
-    this.onChangeTab(1);
+    this.currentTab = "all";
   }
 
+  ngAfterViewInit() {
+    this.onChangeTab(1);
+  }
   onChangeTab(page?: number) {
-    if (this.tabData.find(myObj => myObj.tabName == this.current_tab)) {
-
-    } else {
-      this.tabData.push(new TabData(this.current_tab, 1, []));
-    }
-    this.getTopics(this.current_tab, 1);
+    this.currentPage = 1;
+    this.getTopics(this.currentTab, this.currentPage);
   }
 
   gotoDetail(id: string) {
@@ -47,43 +44,39 @@ export class HomePage {
   }
 
   doRefresh(refresher) {
+    this.currentPage = 1;
     console.log('Begin async operation', refresher);
 
     setTimeout(() => {
       console.log('Async operation has ended');
-      this.getTopics(this.current_tab, 1);
+      this.getTopics(this.currentTab, this.currentPage);
       refresher.complete();
-    }, 1500);
+    }, 500);
   }
 
   doInfinite(infiniteScroll) {
     console.log('Begin async operation');
 
     setTimeout(() => {
-      let tmp = this.tabData.find(myObj => myObj.tabName == this.current_tab);
-      this.getTopics(this.current_tab, ++tmp.page);
+      this.getTopics(this.currentTab, ++this.currentPage);
       console.log('Async operation has ended');
       infiniteScroll.complete();
-    }, 1500);
+    }, 500);
   }
   gotoLogin() {
     this.navCtrl.push('LoginPage');
   }
   getTopics(tab: string, page?: number) {
     this.sharedProvider.httpGet(Global.API.getTopics, { "tab": tab, "page": page, "limit": Global.LIMIT }, true)
-    .then((data)=>{
-      this.extractData(data);
-    });
+      .then((data) => {
+        this.extractData(data);
+      });
   }
   extractData(data) {
-    data = data.data;
-    let tmp: TabData;
-    console.log(this.tabData);
-    if (tmp = this.tabData.find(obj => obj.tabName == this.current_tab && obj.topics.length > 0)) {
-      tmp.topics = tmp.topics.concat(data);
+    if (this.currentPage > 1) {
+      this.topics = this.topics.concat(data.data);
     } else {
-      this.tabData.find(myObj => myObj.tabName == this.current_tab).topics = data;
+      this.topics = data.data;
     }
-    this.topics = this.tabData.find(myObj => myObj.tabName == this.current_tab).topics;
   }
 }

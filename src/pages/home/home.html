@@ -5,11 +5,11 @@
 </ion-header>
 
 <ion-content>
-  <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="加载中...">
+  <ion-refresher [pullMax]="300" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingText="加载中...">
     </ion-refresher-content>
   </ion-refresher>
-  <ion-segment class="padding" [(ngModel)]="current_tab" color="primary" (ionChange)="onChangeTab()">
+  <ion-segment class="padding" [(ngModel)]="currentTab" color="primary" (ionChange)="onChangeTab()">
     <ion-segment-button value="all">
       全部
     </ion-segment-button>
@@ -38,9 +38,9 @@
         <div class="cell">
           <h2 class="pull-left">{{topic.author.loginname}}</h2>
           <span class="pull-right reply_count">
-              <span class="count_of_replies">{{topic.reply_count}}</span>
-          <span class="count_seperator">/</span>
-          <span class="count_of_visits">{{topic.visit_count}}</span>
+            <span class="count_of_replies">{{topic.reply_count}}</span>
+            <span class="count_seperator">/</span>
+            <span class="count_of_visits">{{topic.visit_count}}</span>
           </span>
         </div>
         <div class="clear cell title">
@@ -53,7 +53,7 @@
     </ion-item>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="加载数据中...">
+    <ion-infinite-scroll-content loadingText="加载数据中...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>
