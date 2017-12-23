@@ -18,7 +18,7 @@
     <ion-row>
       <ion-col>
         <h1>{{topic.title}}</h1>
-        <p text-right class="create_at">{{topic.author?.loginname}} {{topic.create_at | since}}</p>
+        <p text-right class="create_at">{{topic.author?.loginname}}发布于{{topic.create_at | since}}前</p>
       </ion-col>
     </ion-row>
     <ion-row>

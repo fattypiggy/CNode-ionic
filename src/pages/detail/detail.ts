@@ -18,12 +18,11 @@ export class DetailPage {
   private id: string;
   private topic: any;
   private accesstoken: string;
-  private offset: number;
   constructor(public navCtrl: NavController, public navParams: NavParams, public sharedProvider: SharedProvider) {
     this.id = navParams.get("id");
   }
   ngOnInit() {
-    this.accesstoken = '42c72ac2-62ca-4b66-ad45-b5f5593378be';
+    this.accesstoken = localStorage.getItem('accesstoken');
     this.topic = this.sharedProvider.httpGet(Global.API.getTopic + this.id, this.accesstoken ? { 'accesstoken': this.accesstoken } : null, true)
       .then(data => {
         this.topic = data.data;
@@ -33,7 +32,7 @@ export class DetailPage {
 
   like(reply) {
     console.log("like++");
-    this.sharedProvider.httpPost(Global.API.upReply.replace(':reply_id', reply.id), { 'accesstoken': this.accesstoken }, false)
+    this.sharedProvider.httpPost(Global.API.upReply.replace(':reply_id', reply.id), this.accesstoken ? { 'accesstoken': this.accesstoken } : null, false)
       .then(data => {
         if (data.success) {
           if (data.action == "down") {
