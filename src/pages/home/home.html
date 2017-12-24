@@ -31,22 +31,22 @@
   </ion-segment>
   <ion-list class="padding">
     <ion-item *ngFor="let topic of topics">
-      <ion-avatar item-start (click)="gotoProfile(topic.author.loginname)">
-        <img src="{{topic.author.avatar_url}}">
+      <ion-avatar item-start (click)="gotoProfile(topic?.author?.loginname)">
+        <img src="{{topic?.author?.avatar_url}}">
       </ion-avatar>
-      <div (click)="gotoDetail(topic.id)">
+      <div (click)="gotoDetail(topic?.id)">
         <div class="cell">
-          <h2 class="pull-left">{{topic.author.loginname}}</h2>
+          <h2 class="pull-left">{{topic?.author?.loginname}}</h2>
           <span class="pull-right reply_count">
-            <span class="count_of_replies">{{topic.reply_count}}</span>
+            <span class="count_of_replies">{{topic?.reply_count}}</span>
             <span class="count_seperator">/</span>
-            <span class="count_of_visits">{{topic.visit_count}}</span>
+            <span class="count_of_visits">{{topic?.visit_count}}</span>
           </span>
         </div>
         <div class="clear cell title">
-          <span *ngIf="topic.top" class="topTab">置顶</span>
-          <span *ngIf="!topic.top" class="topicTab">{{topic.tab}}</span>
-          <span>{{topic.title}}</span>
+          <span *ngIf="topic?.top" class="topTab">置顶</span>
+          <span *ngIf="!topic?.top" class="topicTab">{{topic?.tab}}</span>
+          <span>{{topic?.title}}</span>
         </div>
       </div>
 

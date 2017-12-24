@@ -16,7 +16,7 @@
 <ion-content padding class="profile">
   <ion-item>
     <ion-avatar item-start>
-      <img src="{{userInfo.avatar_url}}">
+      <img src="{{userInfo?.avatar_url}}">
     </ion-avatar>
     <h1>{{userInfo?.loginname}}</h1>
     <p>{{userInfo?.create_at | since}}前加入</p>
