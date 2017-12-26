@@ -8,7 +8,6 @@ import { SharedProvider } from '../providers/shared/shared';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 import { ThreeDeeTouch, ThreeDeeTouchForceTouch, ThreeDeeTouchQuickAction } from "@ionic-native/three-dee-touch";
 @NgModule({
   declarations: [
@@ -26,7 +25,6 @@ import { ThreeDeeTouch, ThreeDeeTouchForceTouch, ThreeDeeTouchQuickAction } from
   providers: [
     StatusBar,
     SplashScreen,
-    QRScanner,
     ThreeDeeTouch,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     SharedProvider
