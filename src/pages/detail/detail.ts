@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { Keyboard } from '@ionic-native/keyboard';
 import { SharedProvider, Global } from "../../providers/shared/shared";
 /**
  * Generated class for the DetailPage page.
@@ -18,7 +18,7 @@ export class DetailPage {
   private id: string;
   private topic: any;
   private accesstoken: string;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public sharedProvider: SharedProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public sharedProvider: SharedProvider, private keyboard: Keyboard) {
     this.id = navParams.get("id");
   }
   ngOnInit() {
@@ -46,5 +46,14 @@ export class DetailPage {
 
         }
       });
+  }
+
+  writeReply() {
+    this.keyboard.disableScroll(true);
+    this.keyboard.show();
+  }
+
+  cancelReply() {
+    this.keyboard.close();
   }
 }

@@ -48,5 +48,7 @@
     </ion-item>
     <p text-center *ngIf="topic?.replies?.length === 0">暂时没有评论</p>
   </ion-list>
-
+  <ion-item>
+    <ion-input (click)="writeReply()" (blur)="cancelReply()" placeholder="写评论" clearInput></ion-input>
+  </ion-item>
 </ion-content>
