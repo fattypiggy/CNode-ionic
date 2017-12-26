@@ -27,15 +27,18 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-list padding-top>
-    <ion-item *ngFor="let reply of topic.replies">
+  <ion-list padding-top class="replies">
+      <ion-list-header>
+        评论
+      </ion-list-header>
+    <ion-item *ngFor="let reply of topic?.replies">
       <ion-avatar item-start (click)="gotoProfile(reply?.author?.loginname)">
         <img src="{{reply?.author?.avatar_url}}">
       </ion-avatar>
       <div>
         <div class="cell reply">
           <span text-left>{{reply?.author?.loginname}}</span>
-          <span class="create_at">{{reply?.create_at | since}}</span>
+          <span class="create_at">{{reply?.create_at | since}}前</span>
           
         </div>
         <i class="fa fa-thumbs-o-up pull-right" *ngIf="!reply?.is_uped" (click)="like(reply)">{{reply?.ups?.length}}</i>
@@ -43,6 +46,7 @@
         <div class="clear" [innerHTML]="reply?.content"  text-wrap></div>
       </div>
     </ion-item>
+    <p text-center *ngIf="topic?.replies?.length === 0">暂时没有评论</p>
   </ion-list>
 
 </ion-content>

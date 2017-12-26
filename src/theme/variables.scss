@@ -22,7 +22,31 @@ $app-direction: ltr;
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/theming/overriding-ionic-variables/
 
-
+ion-list.replies ion-item.item-block {
+  margin: 0;
+  padding: 0;
+  text-align: initial;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: hidden;
+  -webkit-box-align: center;
+  -webkit-align-items: normal;
+  -ms-flex-align: center;
+  align-items: normal;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 4.4rem;
+  border: 0;
+  font-weight: normal;
+  line-height: normal;
+  text-decoration: none;
+  color: inherit;
+}
 
 
 // Named Color Variables
