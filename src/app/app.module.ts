@@ -18,7 +18,9 @@ import { Keyboard } from '@ionic-native/keyboard';
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp,{
+      tabsHideOnSubPages: true,
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
