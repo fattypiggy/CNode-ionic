@@ -17,41 +17,44 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
 
-      threeDeeTouch.watchForceTouches()
-        .subscribe(
-        (data: ThreeDeeTouchForceTouch) => {
-        }
-        );
+      if (platform.is('cordova') && platform.is('ios')) {
 
-
-      let actions: Array<ThreeDeeTouchQuickAction> = [
-        {
-          type: 'checkin',
-          title: '写话题',
-          subtitle: '快速入口',
-          iconType: 'Compose'
-        },
-        {
-          type: 'share',
-          title: '分享"Node中文社区"',
-          iconType: 'Share'
-        }
-      ];
-
-      threeDeeTouch.configureQuickActions(actions);
-
-      threeDeeTouch.onHomeIconPressed().subscribe(
-        (payload) => {
-          // returns an object that is the button you presed
-          console.log('Pressed the ${payload.title} button');
-          switch (payload.title) {
-            case '写话题': console.log('写话题'); break;
-            case '分享"Node中文社区"': console.log('分享"Node中文社区"'); break;
+        threeDeeTouch.watchForceTouches()
+          .subscribe(
+          (data: ThreeDeeTouchForceTouch) => {
           }
-          console.log(payload.type);
+          );
 
-        }
-      )
+
+        let actions: Array<ThreeDeeTouchQuickAction> = [
+          {
+            type: 'checkin',
+            title: '写话题',
+            subtitle: '快速入口',
+            iconType: 'Compose'
+          },
+          {
+            type: 'share',
+            title: '分享"Node中文社区"',
+            iconType: 'Share'
+          }
+        ];
+
+        threeDeeTouch.configureQuickActions(actions);
+
+        threeDeeTouch.onHomeIconPressed().subscribe(
+          (payload) => {
+            // returns an object that is the button you presed
+            console.log('Pressed the ${payload.title} button');
+            switch (payload.title) {
+              case '写话题': console.log('写话题'); break;
+              case '分享"Node中文社区"': console.log('分享"Node中文社区"'); break;
+            }
+            console.log(payload.type);
+
+          }
+        )
+      }
     });
   }
 }
