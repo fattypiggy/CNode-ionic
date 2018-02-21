@@ -26,7 +26,7 @@ export class HomePage implements OnInit, AfterViewInit {
   }
   onChangeTab(page?: number) {
     this.currentPage = 1;
-    this.getTopics(this.currentTab, this.currentPage);
+    this.getTopics(this.currentTab, this.currentPage, true);
   }
 
   gotoDetail(id: string) {
@@ -49,7 +49,7 @@ export class HomePage implements OnInit, AfterViewInit {
 
     setTimeout(() => {
       console.log('Async operation has ended');
-      this.getTopics(this.currentTab, this.currentPage);
+      this.getTopics(this.currentTab, this.currentPage, false);
       refresher.complete();
     }, 500);
   }
@@ -58,7 +58,7 @@ export class HomePage implements OnInit, AfterViewInit {
     console.log('Begin async operation');
 
     setTimeout(() => {
-      this.getTopics(this.currentTab, ++this.currentPage);
+      this.getTopics(this.currentTab, ++this.currentPage, false);
       console.log('Async operation has ended');
       infiniteScroll.complete();
     }, 500);
@@ -66,8 +66,8 @@ export class HomePage implements OnInit, AfterViewInit {
   gotoLogin() {
     this.navCtrl.push('LoginPage');
   }
-  getTopics(tab: string, page?: number) {
-    this.sharedProvider.httpGet(Global.API.getTopics, { "tab": tab, "page": page, "limit": Global.LIMIT }, true)
+  getTopics(tab: string, page?: number, loader = true) {
+    this.sharedProvider.httpGet(Global.API.getTopics, { "tab": tab, "page": page, "limit": Global.LIMIT }, loader)
       .then((data) => {
         this.extractData(data);
       });

@@ -5,8 +5,8 @@
 </ion-header>
 
 <ion-content>
-  <ion-refresher [pullMax]="300" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingText="加载中...">
+  <ion-refresher [pullMax]="700" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新">
     </ion-refresher-content>
   </ion-refresher>
   <ion-segment class="padding" [(ngModel)]="currentTab" color="primary" (ionChange)="onChangeTab()">
