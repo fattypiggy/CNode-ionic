@@ -13,7 +13,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding #content>
   <ion-grid>
     <ion-row>
       <ion-col>
@@ -27,10 +27,11 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+
   <ion-list padding-top class="replies">
-      <ion-list-header>
-        评论
-      </ion-list-header>
+    <ion-list-header>
+      评论
+    </ion-list-header>
     <ion-item *ngFor="let reply of topic?.replies">
       <ion-avatar item-start (click)="gotoProfile(reply?.author?.loginname)">
         <img src="{{reply?.author?.avatar_url}}">
@@ -39,16 +40,28 @@
         <div class="cell reply">
           <span text-left>{{reply?.author?.loginname}}</span>
           <span class="create_at">{{reply?.create_at | since}}前</span>
-          
         </div>
-        <i class="fa fa-thumbs-o-up pull-right" *ngIf="!reply?.is_uped" (click)="like(reply)">{{reply?.ups?.length}}</i>
-        <i class="fa fa-thumbs-up pull-right" *ngIf="reply?.is_uped" (click)="like(reply)">{{reply?.ups?.length}}</i>
-        <div class="clear" [innerHTML]="reply?.content"  text-wrap></div>
+        <i class="fa fa-thumbs-o-up pull-right custom-fa-o" *ngIf="!reply?.is_uped" (click)="like(reply)">{{reply?.ups?.length}}</i>
+        <i class="fa fa-thumbs-up pull-right custom-fa-o" *ngIf="reply?.is_uped" (click)="like(reply)">{{reply?.ups?.length}}</i>
+        <div class="clear" [innerHTML]="reply?.content" text-wrap></div>
       </div>
     </ion-item>
     <p text-center *ngIf="topic?.replies?.length === 0">暂时没有评论</p>
   </ion-list>
-  <ion-item>
-    <ion-input (click)="writeReply()" (blur)="cancelReply()" placeholder="写评论" clearInput></ion-input>
-  </ion-item>
+
 </ion-content>
+<ion-footer [keyboardAttach]="content">
+  <ion-toolbar *ngIf="showInput">
+    <i class="fa fa-heart-o fa-lg custom-fa-o" aria-hidden="true"></i>
+    <i class="fa fa-comment-o fa-lg custom-fa-o" aria-hidden="true" (click)="writeReply()"></i>
+    <!-- <input placeholder="评论" (click)="writeReply()" (blur)="cancelReply"> -->
+    <div class="fa" float-right ion-text color="grey" padding-right>
+      <span>{{topic?.visit_count}}</span>
+      <span>访问</span>
+    </div>
+  </ion-toolbar>
+  <ion-toolbar *ngIf="!showInput">
+      <ion-input  placeholder="评论"></ion-input>
+      <div class="fa" float-right ion-text color="primary" (click)="doReply($event)"></div>
+  </ion-toolbar>
+</ion-footer>
