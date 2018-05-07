@@ -21,14 +21,14 @@ export class DetailPage {
   private onHideSubscription: Subscription;
   private id: string;
   private topic: any;
-  private accesstoken: string;
+  private accessToken: string;
   private showInput: boolean;
   constructor(public navCtrl: NavController, public navParams: NavParams, public sharedProvider: SharedProvider, private keyboard: Keyboard) {
     this.id = navParams.get("id");
   }
   ngOnInit() {
-    this.accesstoken = localStorage.getItem('accesstoken');
-    this.topic = this.sharedProvider.httpGet(Global.API.getTopic + this.id, this.accesstoken ? { 'accesstoken': this.accesstoken } : null, true)
+    this.accessToken = localStorage.getItem('accessToken');
+    this.topic = this.sharedProvider.httpGet(Global.API.getTopic + this.id, this.accessToken ? { 'accessToken': this.accessToken } : null, true)
       .then(data => {
         this.topic = data.data;
       });
@@ -42,7 +42,7 @@ export class DetailPage {
   }
   like(reply) {
     console.log("like++");
-    this.sharedProvider.httpPost(Global.API.upReply.replace(':reply_id', reply.id), this.accesstoken ? { 'accesstoken': this.accesstoken } : null, false)
+    this.sharedProvider.httpPost(Global.API.upReply.replace(':reply_id', reply.id), this.accessToken ? { 'accessToken': this.accessToken } : null, false)
       .then(data => {
         if (data.success) {
           if (data.action == "down") {

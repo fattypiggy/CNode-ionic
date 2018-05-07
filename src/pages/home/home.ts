@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 import { SharedProvider, Global } from "../../providers/shared/shared";
 import { OnInit, AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
+import { Topic } from '../../model/topic';
 
 @IonicPage()
 @Component({
@@ -11,7 +12,7 @@ import { OnInit, AfterViewInit } from '@angular/core/src/metadata/lifecycle_hook
 export class HomePage implements OnInit, AfterViewInit {
   private currentTab: string;
   private currentPage: number;
-  private topics: Array<any>;
+  private topics: Array<Topic>;
   // private isAuthenticated: boolean;
 
   constructor(public navCtrl: NavController, public sharedProvider: SharedProvider) {
